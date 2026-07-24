@@ -31,10 +31,8 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Install
+      - name: Edit file
         if: steps.file_exists.outputs.exists == 'true'
-        run: pip install ruamel.yaml
-      
-      - name: Run Python script
-        if: steps.file_exists.outputs.exists == 'true'
-        run: python hello.py ${{ github.event.inputs.entity }}
+        run: |
+          pip install ruamel.yaml
+          python hello.py ${{ github.event.inputs.entity }}
