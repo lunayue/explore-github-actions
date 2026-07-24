@@ -1,0 +1,6 @@
+vector:
+  sources:
+    kafka_source_dev:
+      type: kafka
+      topics:
+        - dev-topic
