@@ -25,4 +25,4 @@ jobs:
         run: pip install ruamel.yaml
       
       - name: Run Python script
-        run: python hello.py
+        run: python hello.py ${{ github.event.inputs.entity }}
