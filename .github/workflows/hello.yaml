@@ -5,7 +5,10 @@ on:
     inputs:
       entity:
         description: "who to say hello to"
-        required: true  
+        required: true
+      file:
+        description: "file to create/edit"
+        required: true
         
 
 jobs:
@@ -16,13 +19,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
+      - name: Check if file already exists
+        id: file_exists
+        uses: thebinaryfelix/check-file-existence-action@2.0.0
+
       - name: Set up Python
-        uses: actions/setup-python@v7 
+        if: steps.file_exists.outputs.exists == 'true'
+        uses: actions/setup-python@v7
         with:
           python-version: '3.13'
 
       - name: Install
+        if: steps.file_exists.outputs.exists == 'true'
         run: pip install ruamel.yaml
       
       - name: Run Python script
+        if: steps.file_exists.outputs.exists == 'true'
         run: python hello.py ${{ github.event.inputs.entity }}
