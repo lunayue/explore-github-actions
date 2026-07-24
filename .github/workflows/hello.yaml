@@ -1,9 +1,12 @@
 name: Hello Python Script Workflow
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      entity:
+        description: "who to say hello to"
+        required: true  
+        
 
 jobs:
   run-python-script:
