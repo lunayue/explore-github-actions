@@ -22,6 +22,8 @@ jobs:
       - name: Check if file already exists
         id: file_exists
         uses: thebinaryfelix/check-file-existence-action@2.0.0
+        with:
+          files: ${{ github.event.inputs.file }}
 
       - name: Set up Python
         if: steps.file_exists.outputs.exists == 'true'
