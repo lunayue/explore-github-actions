@@ -19,4 +19,5 @@ jobs:
           python-version: '3.13'
       
       - name: Run Python script
+        run: pip install ruamel.yaml
         run: python hello.py
