@@ -9,10 +9,6 @@ on:
       file:
         description: "file to create/edit"
         required: true
-
-env:
-  FILE: ${{ github.event.inputs.file }}
-  ENTITY: ${{ github.event.inputs.entity }}
         
 
 jobs:
@@ -27,7 +23,7 @@ jobs:
         id: file_exists
         uses: thebinaryfelix/check-file-existence-action@2.0.0
         with:
-          files: $FILE
+          files: ${{ github.event.inputs.file }}
 
       - name: Set up Python
         if: steps.file_exists.outputs.exists == 'true'
@@ -41,4 +37,4 @@ jobs:
       
       - name: Run Python script
         if: steps.file_exists.outputs.exists == 'true'
-        run: python hello.py $ENTITY
+        run: python hello.py ${{ github.event.inputs.entity }}
